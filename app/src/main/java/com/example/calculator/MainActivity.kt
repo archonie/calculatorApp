@@ -11,6 +11,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
     }
+    var flag = false
     fun btnNumClick(view: View){
         if(newOp){
             showNum.setText("")
@@ -58,6 +59,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
         showNum.setText(btnClickValue)
+        flag = false
     }
     var operator = "*"
     var oldNum = ""
@@ -82,9 +84,13 @@ class MainActivity : AppCompatActivity() {
         oldNum = showNum.text.toString()
         newOp = true
         operatorText.setText(operator)
-
+        flag = false
     }
     fun btnEqualClick(view: View){
+        if(flag){
+
+            return
+        }
         var  newNum = showNum.text.toString()
         var resultNum: Double ?= null
         when(operator){
@@ -103,8 +109,9 @@ class MainActivity : AppCompatActivity() {
         }
         showNum.setText(resultNum.toString())
         newOp = true
-        oldNum = "0"
+
         operatorText.setText("")
+        flag = true
     }
     fun btnClearClick(view: View){
         showNum.setText("0")
